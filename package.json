@@ -1,0 +1,17 @@
+{
+  "name": "quokka-pelis-backend",
+  "version": "1.0.0",
+  "description": "backend de quokka pelis",
+  "main": "app.js",
+  "scripts": {
+    "start:dev": "npx nodemon app.js"
+  },
+  "author": "Alexander Avila - Margoth Grau - Hamlet Garcia - Luigui Pejerrey",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mssql": "^6.2.3"
+  }
+}

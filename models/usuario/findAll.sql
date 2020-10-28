@@ -1,0 +1,1 @@
+select * from ufn_findAllUsuarios();
