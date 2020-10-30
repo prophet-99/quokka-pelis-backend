@@ -1,33 +1,33 @@
-const { loadSqlQueries } = require('./../../helpers/load-sql-queries');
 const mssql = require('mssql');
-const path = require('path'); 
 
-const register = ({ sql = mssql, getConnection }) => {
-    const sqlQueries = loadSqlQueries( path.join(__dirname, 'queries') );
-
+const register = ({ sql = mssql, connection }) => {
+    
     //Métodos para ejecutar las consultas (CRUD, SEARCH)
     const findAll = async () => {
-        const cnx = await getConnection();
-        const request = await cnx.request();
-        return request.query(sqlQueries.findAll)
+        const sqlQuery = 'select * from ufn_findAllUsuarios();';
+
+        const request = await connection.request();
+        return request.query(sqlQuery)
             .then( (vq) => vq.recordsets[0] )
             .catch( (err) => { throw err; } ); 
     };
 
     const findByRole = async ( userRol ) => {
-        const cnx = await getConnection();
-        const request = await cnx.request();
+        const sqlQuery = 'select * from ufn_searchUsuarioByRol(@userRol);'
+
+        const request = await connection.request();
         request.input('userRol', sql.VarChar(100), userRol);
-        return request.query(sqlQueries.findByRole)
+        return request.query(sqlQuery)
             .then( (vq) => vq.recordsets[0] )
             .catch( (err) => { throw err; } );
     };
     
     const findByNameOrSurname = async ( nameOrSurname ) => {
-        const cnx = await getConnection();
-        const request = await cnx.request();
+        const sqlQuery = 'select * from ufn_searchUsuarioByNombresOrApellidos(@nameOrSurname);'
+
+        const request = await connection.request();
         request.input('nameOrSurname', sql.VarChar(100), nameOrSurname);
-        return request.query(sqlQueries.findByNameOrSurname)
+        return request.query(sqlQuery)
             .then( (vq) => vq.recordsets[0] )
             .catch( (err) => { throw err; } ); ;
     };

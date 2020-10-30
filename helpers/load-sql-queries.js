@@ -13,3 +13,5 @@ const loadSqlQueries = (dirPath) => {
 };
 
 module.exports = { loadSqlQueries };
+
+//! TODO: USADO PARA LA VERSIÓN ALPHA

@@ -1,37 +1,52 @@
-const sql = require('mssql');
+const mssql = require('mssql');
+
+const { sql } = require('./../config');
 const usuario = require('./../models/usuario');
+const rol = require('./../models/rol');
 
-const dataClient = async (config) => {
-    let pool = null;
+class SQLServerConnection{
+    static instance;
+    poolConnection;
 
-    const closePool = async () => {
+    constructor(){
+        if (!!SQLServerConnection.instance){
+            return SQLServerConnection.instance;
+        }
+        SQLServerConnection.instance = this;
+        this.getConnection();
+    }
+
+    async closeConnection(){
         try{
-            await pool.close();
+            await this.poolConnection.close();
         }catch(error){
-            pool = null;
+            this.poolConnection = null;
             console.log(error);
         }
-    };
-    
-    const getConnection = async () => {
-        try{
-            if(pool) return pool;
+    }
 
-            pool = await sql.connect(config);
-            pool.on('error', async (err) => {
+    async getConnection(){
+        try{
+            if(this.poolConnection) return this.poolConnection;
+            
+            this.poolConnection = await mssql.connect(sql);
+            this.poolConnection.on('error', async (err) => {
                 console.log(err);
-                await closePool();
+                await closePoolConnection();
             });
-            return pool;
         }catch(error){
             console.log(error);
-            pool = null;
+            this.poolConnection = null;
         }
-    };
+    }
 
-    return {
-        usuarioRepository: usuario.register({ sql, getConnection })
-    };
-};
+    async getRepositories(){
+        const connection = await this.getConnection();
+        return {
+            usuarioRepository: usuario.register({ mssql, connection }),
+            rolRepository: rol.register({ mssql, connection })
+        }
+    }
+}
 
-module.exports = dataClient;
+module.exports = new SQLServerConnection();

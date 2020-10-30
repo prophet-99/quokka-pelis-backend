@@ -1,1 +1,0 @@
-select * from ufn_searchUsuarioByRol(@userRol);
