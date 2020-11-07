@@ -3,7 +3,6 @@
  */
 const { Router } = require('express');
 const { check } = require('express-validator');
-
 const { validateFields } = require('./../middlewares/check-fields');
 const { findAll, save } = require('./../controllers/usuarios');
 
