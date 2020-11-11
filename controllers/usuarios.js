@@ -3,9 +3,8 @@ const SQLServerConnection = require('./../database');
 
 const findAll = async (req = request, res = response) => {
     const { role, nameSurname } = req.query;
-    const { usuarioRepository } = await SQLServerConnection.getRepositories();
-
     try{
+        const { usuarioRepository } = await SQLServerConnection.getRepositories();
         if (role){
             const usuariosDB = await usuarioRepository.findByRole(role);
             return res.json({ ok: true, usuarios: usuariosDB });

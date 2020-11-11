@@ -3,8 +3,8 @@ const SQLServerConnection = require('./../database');
 const Rol = require('../models/rol/rol');
 
 const findAll = async (req = request, res = response) => {
-    const { rolRepository } = await SQLServerConnection.getRepositories();
     try{
+        const { rolRepository } = await SQLServerConnection.getRepositories();
         const roles = await rolRepository.findAll();
         res.json({ ok: true, roles });        
     }catch(err){
@@ -15,8 +15,8 @@ const findAll = async (req = request, res = response) => {
 
 const save = async (req = request, res = response) => {
     const { id, descripcion } = req.body;
-    const { rolRepository } = await SQLServerConnection.getRepositories();
     try{
+        const { rolRepository } = await SQLServerConnection.getRepositories();
         const role = new Rol({ id, descripcion });
         await rolRepository.save(role);
         res.json({ ok: true, msg: 'Se guardó correctamente' });        
