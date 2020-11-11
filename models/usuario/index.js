@@ -4,7 +4,7 @@ const register = ({ sql = mssql, connection }) => {
     
     //Métodos para ejecutar las consultas (CRUD, SEARCH)
     const findAll = async () => {
-        const sqlQuery = 'select * from ufn_findAllUsuarios();';
+        const sqlQuery = 'select * from ufn_findAllUsuarios()';
 
         const request = await connection.request();
         return request.query(sqlQuery)
@@ -13,7 +13,7 @@ const register = ({ sql = mssql, connection }) => {
     };
 
     const findByRole = async ( userRol ) => {
-        const sqlQuery = 'select * from ufn_searchUsuarioByRol(@userRol);'
+        const sqlQuery = 'select * from ufn_searchUsuarioByRol(@userRol)'
 
         const request = await connection.request();
         request.input('userRol', sql.VarChar(100), userRol);
@@ -23,7 +23,7 @@ const register = ({ sql = mssql, connection }) => {
     };
     
     const findByNameOrSurname = async ( nameOrSurname ) => {
-        const sqlQuery = 'select * from ufn_searchUsuarioByNombresOrApellidos(@nameOrSurname);'
+        const sqlQuery = 'select * from ufn_searchUsuarioByNombresOrApellidos(@nameOrSurname)'
 
         const request = await connection.request();
         request.input('nameOrSurname', sql.VarChar(100), nameOrSurname);
