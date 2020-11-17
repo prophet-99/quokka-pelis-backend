@@ -4,7 +4,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validateFields } = require('./../middlewares/check-fields');
-const { findAll, save } = require('./../controllers/usuarios');
+const { findAll, save, deleteById } = require('./../controllers/usuarios');
 
 const router = Router();
 
@@ -21,5 +21,6 @@ router.post('/', [
     check('genero', 'El genero es obligatorio').notEmpty(),
     validateFields
 ], save);
+router.delete('/:id', deleteById);
 
 module.exports = router;

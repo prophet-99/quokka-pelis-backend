@@ -4,7 +4,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validateFields } = require('./../middlewares/check-fields');
-const { findAll, save } = require('./../controllers/roles');
+const { findAll, save, deleteById } = require('./../controllers/roles');
 
 const router = Router();
 
@@ -14,5 +14,6 @@ router.post('/',[
     check('descripcion', 'La descripción es requerida').notEmpty(),
     validateFields
 ], save);
+router.delete('/:id', deleteById);
 
 module.exports = router;

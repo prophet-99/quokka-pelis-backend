@@ -2,7 +2,7 @@ const { request, response } = require('express');
 const SQLServerConnection = require('./../database');
 const Usuario = require('./../models/usuario/usuario');
 
-const findAll = async (req = request, res = response) => {
+const auth = async (req = request, res = response) => {
     const { role, nameSurname } = req.query;
     try{
         const { usuarioRepository } = await SQLServerConnection.getRepositories();
@@ -24,7 +24,7 @@ const findAll = async (req = request, res = response) => {
     }
 };
 
-const save = async (req = request, res = response) =>  {
+const register = async (req = request, res = response) =>  {
     const { id, correo, contrasenia, contraseniaPhrase, nombres,
         apellidos, telefono, idRol, genero } = req.body;
 
@@ -60,4 +60,3 @@ module.exports = {
     save,
     deleteById
 };
-

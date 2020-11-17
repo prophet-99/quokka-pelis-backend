@@ -26,7 +26,20 @@ const save = async (req = request, res = response) => {
     }
 };
 
+const deleteById = async (req = request, res = response) => {
+    const { id } = req.params;
+    try{
+        const { rolRepository } = await SQLServerConnection.getRepositories();
+        await rolRepository.deleteById(id);
+        res.json({ ok: true, msg: 'Eliminado correctamente' });
+    }catch(err){
+        console.log(err);
+        res.status(500).json({ ok: false, msg: 'Error de servidor' });
+    }
+};
+
 module.exports = {
     findAll,
-    save
+    save,
+    deleteById
 };
