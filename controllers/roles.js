@@ -9,7 +9,7 @@ const findAll = async (req = request, res = response) => {
         res.json({ ok: true, roles });        
     }catch(err){
         console.log(err);
-        res.status(500).json({ ok: false, msg: 'Error de servidor' });
+        res.status(500).json({ ok: false, msg: err });
     }
 };
 
@@ -22,7 +22,7 @@ const save = async (req = request, res = response) => {
         res.json({ ok: true, msg: 'Se guardó correctamente' });        
     }catch(err){
         console.log(err);
-        res.status(500).json({ ok: false, msg: 'Error de servidor' });
+        res.status(500).json({ ok: false, msg: err });
     }
 };
 
@@ -34,7 +34,7 @@ const deleteById = async (req = request, res = response) => {
         res.json({ ok: true, msg: 'Eliminado correctamente' });
     }catch(err){
         console.log(err);
-        res.status(500).json({ ok: false, msg: 'Error de servidor' });
+        res.status(500).json({ ok: false, msg: err });
     }
 };
 

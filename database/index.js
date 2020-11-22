@@ -3,6 +3,7 @@ const mssql = require('mssql');
 const { sql } = require('./../config');
 const usuario = require('./../models/usuario');
 const rol = require('./../models/rol');
+const auth = require('./../models/auth');
 
 class SQLServerConnection{
     static instance;
@@ -44,7 +45,8 @@ class SQLServerConnection{
         const connection = await this.getConnection();
         return {
             usuarioRepository: usuario.register({ mssql, connection }),
-            rolRepository: rol.register({ mssql, connection })
+            rolRepository: rol.register({ mssql, connection }),
+            authRepository: auth.register({ mssql, connection })
         }
     }
 }

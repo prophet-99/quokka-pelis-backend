@@ -5,6 +5,6 @@ const app = express();
 
 app.use(`${ baseAPI }/usuario`, require('./usuarios'));
 app.use(`${ baseAPI }/rol`, require('./roles'));
-// app.use(`${ baseAPI }/pelicula`, require('./pelicula'));
+app.use(`${ baseAPI }/auth`, require('./auth'));
 
 module.exports = app;

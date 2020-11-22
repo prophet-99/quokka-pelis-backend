@@ -10,6 +10,7 @@ const router = Router();
 
 router.get('/', findAll);
 router.post('/', [
+    check('id', 'El id es obligatorio').notEmpty(),
     check('correo', 'El correo es obligatorio').isEmail(),
     check('contrasenia', 'La contraseña es obligatoria').notEmpty(),
     check('contraseniaPhrase', 'La frase de contraseña es obligatoria').notEmpty(),
