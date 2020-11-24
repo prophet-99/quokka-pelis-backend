@@ -20,7 +20,7 @@ const findAll = async (req = request, res = response) => {
         res.json({ ok: true, usuarios: usuariosDB });
     }catch(err){
         console.log(err);
-        res.status(500).json({ ok: false, msg: 'Error de servidor' });
+        res.status(500).json({ ok: false, msg: err });
     }
 };
 
@@ -34,11 +34,11 @@ const save = async (req = request, res = response) =>  {
             id, correo, contrasenia, contraseniaPhrase, nombres,
             apellidos, telefono, idRol, genero
         });
-        usuarioRepository.save(usuarioReq);
+        await usuarioRepository.save(usuarioReq);
         res.json({ ok: true, msg: 'Usuario guardado correctamente' });
     }catch(err){
         console.log(err);
-        res.status(500).json({ ok: false, msg: 'Error de servidor' });
+        res.status(500).json({ ok: false, msg: err });
     }
 };
 
@@ -47,11 +47,11 @@ const deleteById = async (req = request, res = response) => {
 
     try{
         const { usuarioRepository } = await SQLServerConnection.getRepositories();
-        usuarioRepository.deleteById(id);
+        await usuarioRepository.deleteById(id);
         res.json({ ok: true, msg: ' Usuario eliminado correctamente' })
     }catch(err){
         console.log(err);
-        res.status(500).json({ ok: false, msg: 'Error de servidor' });
+        res.status(500).json({ ok: false, msg: err });
     }
 };
 
