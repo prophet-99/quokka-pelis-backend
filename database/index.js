@@ -50,5 +50,4 @@ class SQLServerConnection{
         }
     }
 }
-
 module.exports = new SQLServerConnection();
