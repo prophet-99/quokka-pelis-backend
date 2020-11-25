@@ -5,6 +5,7 @@ const { port } = require('./config');
 const app = express();
 
 app.use( cors() )
+    .use( express.static(`${ __dirname }/public`) )
     .use( express.json() )
     .use( require('./routes') );
 
