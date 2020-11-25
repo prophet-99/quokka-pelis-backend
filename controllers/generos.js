@@ -3,7 +3,7 @@ const Genero = require('../models/genero/genero');
 const SQLServerConnection = require('./../database');
 
 const findAll = async (req = request, res = response) => {
-    const { word } = req.query;
+    const { word } = req.body;
     const { generoRepository } = await SQLServerConnection.getRepositories();
 
     try{
@@ -20,7 +20,7 @@ const findAll = async (req = request, res = response) => {
 };
 
 const save = async (req = request, res = response) => {
-    const { id, descripcion } = req.query;
+    const { id, descripcion } = req.body;
     
     try{
         const { generoRepository } = await SQLServerConnection.getRepositories();
@@ -34,7 +34,7 @@ const save = async (req = request, res = response) => {
 };
 
 const deleteGender = async (req = request, res = response) => {
-    const { id } = req.query;
+    const { id } = req.params;
     try{
     const { generoRepository } = await SQLServerConnection.getRepositories();
     await generoRepository.deleteGender(id);

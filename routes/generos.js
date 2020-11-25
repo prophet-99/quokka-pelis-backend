@@ -10,6 +10,6 @@ router.post('/', [
     check('descripcion','La descripcion es obligatorio').notEmpty(),
     validateFields
 ], save);
-router.delete('/', deleteGender);
+router.delete('/:id', deleteGender);
 
 module.exports = router;
