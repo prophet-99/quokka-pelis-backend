@@ -20,7 +20,7 @@ const findAll = async (req = request, res = response) => {
 };
 
 const save = async (req = request, res = response) => {
-    const { id, nombre, sede_principal } = req.query;
+    const { id, nombre, sede_principal } = req.body;
     
     try{
         const { estudioRepository } = await SQLServerConnection.getRepositories();
@@ -34,7 +34,7 @@ const save = async (req = request, res = response) => {
 };
 
 const deleteEstudio = async (req = request, res = response) => {
-    const { id } = req.query;
+    const { id } = req.params;
     try{
     const { estudioRepository } = await SQLServerConnection.getRepositories();
     await estudioRepository.deleteEstudio(id);
