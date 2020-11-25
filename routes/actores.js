@@ -13,6 +13,6 @@ router.post('/', [
     check('genero','El genero es obligatorio').notEmpty(),
     validateFields
 ], save);
-router.delete('/', deleteActor);
+router.delete('/:id', deleteActor);
 
 module.exports = router;

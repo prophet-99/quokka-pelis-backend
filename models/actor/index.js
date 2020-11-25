@@ -29,7 +29,7 @@ const register = ({ sql = mssql, connection }) => {
             request.input('nombres', sql.VarChar(45), actor.nombres);
             request.input('apellidos', sql.VarChar(45), actor.apellidos);
             request.input('nacionalidad', sql.VarChar(45), actor.nacionalidad);
-            request.input('genero', sql.Int, actor.genero);
+            request.input('genero', sql.VarChar(45), actor.genero);
 
             //TODO: ACABAR
         } else {
@@ -37,7 +37,7 @@ const register = ({ sql = mssql, connection }) => {
             request.input('nombres', sql.VarChar(45), actor.nombres);
             request.input('apellidos', sql.VarChar(45), actor.apellidos);
             request.input('nacionalidad', sql.VarChar(45), actor.nacionalidad);
-            request.input('genero', sql.Int, actor.genero);
+            request.input('genero', sql.VarChar(45), actor.genero);
             request.input('id', sql.Int, actor.id);
         }
         return request.query(sqlQuery)

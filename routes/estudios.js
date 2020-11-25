@@ -11,6 +11,6 @@ router.post('/', [
     check('sede_principal','La sede principal es obligatorio').notEmpty(),
     validateFields
 ], save);
-router.delete('/', deleteEstudio);
+router.delete('/:id', deleteEstudio);
 
 module.exports = router;

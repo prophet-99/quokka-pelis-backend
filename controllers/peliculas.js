@@ -89,8 +89,8 @@ const Characters = async (req = request, res = response) => {
 };
 
 const save = async (req = request, res = response) =>  {
-    const { id, nombre, sinopsis, anio_lanzamiento, id_video, id_estudio,
-        cadenaGeneros, cadenaDirectores, cadenaPersonajes } = req.body;
+    const { id, nombre, sinopsis, anio_lanzamiento, id_estudio,
+        cadenaGeneros, cadenaDirectores } = req.body;
     var op = false;
     var url_poster = 'public/posters/';
     if(req.file){
@@ -99,7 +99,7 @@ const save = async (req = request, res = response) =>  {
     }
     try{
         const { peliculaRepository } = await SQLServerConnection.getRepositories();
-        const movie = new Pelicula({ id, nombre, sinopsis, anio_lanzamiento, url_poster, id_video, id_estudio });
+        const movie = new Pelicula({ id, nombre, sinopsis, anio_lanzamiento, url_poster, id_estudio });
         await peliculaRepository.save(movie)
             .then(
                 op === true
@@ -107,7 +107,6 @@ const save = async (req = request, res = response) =>  {
         if(op){
             await peliculaRepository.AddGenderByMovie(cadenaGeneros, movie.id);
             await peliculaRepository.AddCharactersByMovie(cadenaDirectores, movie.id);
-            await peliculaRepository.AddDirectorsByMovie(cadenaPersonajes, movie.id);
         }
         res.json({ ok: true, msg: 'Se guardó correctamente' });        
     }catch(err){
