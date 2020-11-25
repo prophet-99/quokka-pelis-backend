@@ -22,9 +22,9 @@ const register = ({ sql = mssql, connection }) => {
 
             sqlQuery = 'exec ups_AgregarPelicula @nombre , @sinopsis , @anio_lanzamiento , @url_poster , @id_video , @id_estudio; ';
             request.input('nombre', sql.VarChar(45), movie.nombre);
-            request.input('sinopsis', sql.VarChar(45), movie.sinopsis);
+            request.input('sinopsis', sql.VarChar(mssql.MAX), movie.sinopsis);
             request.input('anio_lanzamiento', sql.Date, movie.anio_lanzamiento);
-            request.input('url_poster', sql.VarChar(45), movie.url_poster);
+            request.input('url_poster', sql.VarChar(mssql.MAX), movie.url_poster);
             request.input('id_video', sql.Int, movie.id_video);
             request.input('id_estudio', sql.Int, movie.id_estudio);
 
@@ -32,9 +32,9 @@ const register = ({ sql = mssql, connection }) => {
         } else {
             sqlQuery = 'exec ups_EditarPelicula @nombre,@sinopsis,@anio_lanzamiento,@url_poster,@id_video,@id_estudio,@id;';
             request.input('nombre', sql.VarChar(45), movie.nombre);
-            request.input('sinopsis', sql.VarChar(45), movie.sinopsis);
+            request.input('sinopsis', sql.VarChar(mssql.MAX), movie.sinopsis);
             request.input('anio_lanzamiento', sql.Date, movie.anio_lanzamiento);
-            request.input('url_poster', sql.VarChar(45), movie.url_poster);
+            request.input('url_poster', sql.VarChar(mssql.MAX), movie.url_poster);
             request.input('id_video', sql.Int, movie.id_video);
             request.input('id_estudio', sql.Int, movie.id_estudio);
             request.input('id', sql.Int, movie.id);

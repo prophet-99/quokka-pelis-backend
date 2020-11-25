@@ -89,7 +89,8 @@ const Characters = async (req = request, res = response) => {
 };
 
 const save = async (req = request, res = response) =>  {
-    const { id, nombre, sinopsis, anio_lanzamiento, id_video, id_estudio, cadenaGeneros, cadenaDirectores, cadenaPersonajes} = req.body;
+    const { id, nombre, sinopsis, anio_lanzamiento, id_video, id_estudio,
+        cadenaGeneros, cadenaDirectores, cadenaPersonajes } = req.body;
     var op = false;
     var url_poster = 'public/posters/';
     if(req.file){
