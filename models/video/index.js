@@ -29,13 +29,13 @@ const register = ({ sql = mssql, connection }) => {
         const request = await connection.request();
         if (video.id === 0){
             sqlQuery = 'exec ups_AgregarVideo @url_video,@valoracion,@duracion';
-            request.input('url_video', sql.VarChar(100), video.url_video);
+            request.input('url_video', sql.VarChar(mssql.MAX), video.url_video);
             request.input('valoracion', sql.Int, video.valoracion);
             request.input('duracion', sql.VarChar(45), video.duracion);
             //TODO: ACABAR
         }else {
             sqlQuery = 'exec ups_EditarVideo @url_video,@valoracion,@duracion,@id';
-            request.input('url_video', sql.VarChar(100), video.url_video);
+            request.input('url_video', sql.VarChar(mssql.MAX), video.url_video);
             request.input('valoracion', sql.Int, video.valoracion);
             request.input('duracion', sql.VarChar(45), video.duracion);
             request.input('id', sql.Int, video.id);
