@@ -4,6 +4,9 @@ const { sql } = require('./../config');
 const usuario = require('./../models/usuario');
 const rol = require('./../models/rol');
 const auth = require('./../models/auth');
+const serie = require('./../models/serie');
+const temporada = require('./../models/temporada');
+const capitulo = require('./../models/capitulo');
 
 class SQLServerConnection{
     static instance;
@@ -46,7 +49,10 @@ class SQLServerConnection{
         return {
             usuarioRepository: usuario.register({ mssql, connection }),
             rolRepository: rol.register({ mssql, connection }),
-            authRepository: auth.register({ mssql, connection })
+            authRepository: auth.register({ mssql, connection }),
+            serieRepository: serie.register({ mssql, connection }),
+            temporadaRepository: temporada.register({ mssql, connection }),
+            capituloRepository: capitulo.register({ mssql, connection })
         }
     }
 }
