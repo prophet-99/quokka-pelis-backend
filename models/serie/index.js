@@ -58,7 +58,7 @@ const register = ({ sql = mssql, connection }) => {
         const sqlQuery = 'select * from ufn_ListarSeriesFiltro(@filter);'
 
         const request = await connection.request();
-        request.input('filter', sql.IVerchar(45), filter);
+        request.input('filter', sql.VarChar(45), filter);
         return request.query(sqlQuery)
             .then((vq) => vq.recordsets[0])
             .catch((err) => { throw err; });
