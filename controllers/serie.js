@@ -39,6 +39,7 @@ const save = async (req = request, res = response) =>  {
     const { id, nombre, sinopsis, anio_lanzamiento,id_estudio, cadenaGeneros, cadenaDirectores} = req.body;
     var op = false;
     var url_poster = 'public/posters/';
+    console.log(req.body);
     if(req.file){
         url_poster = `${req.file.path}`;
         console.log(url_poster);
@@ -48,10 +49,10 @@ const save = async (req = request, res = response) =>  {
         const movie = new Serie({ id, nombre, sinopsis, anio_lanzamiento, url_poster, id_estudio });
         await serieRepository.save(movie)
             .then(
-                op === true
+                op = true
             );
         if(op){
-            await serieRepository.AddGenderBySerie(cadenaGeneros, movie.id);
+            await serieRepository.AddGendersBySerie(cadenaGeneros, movie.id);
             await serieRepository.AddDirectorsBySerie(cadenaDirectores, movie.id);
         }
         res.json({ ok: true, msg: 'Se guardó correctamente' });        
@@ -85,7 +86,7 @@ const Season = async (req = request, res = response) => {
     }
 };
 const DeleteBySerie = async (req = request, res = response) => {
-    const { id } = req.query;
+    const { id } = req.params;
     const { serieRepository } = await SQLServerConnection.getRepositories();
 
     try{

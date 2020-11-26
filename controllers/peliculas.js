@@ -130,7 +130,7 @@ const save = async (req = request, res = response) => {
 
 const DeleteByMovie = async (req = request, res = response) => {
     const { id } = req.params;
-    const { peliculaRepository } = await SQLServerConnection.getRepositories();
+    const { peliculaRepository, videoRepository } = await SQLServerConnection.getRepositories();
 
     try {
         const image = await peliculaRepository.Url_poster(id);

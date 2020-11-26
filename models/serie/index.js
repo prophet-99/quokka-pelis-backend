@@ -15,7 +15,7 @@ const register = ({ sql = mssql, connection }) => {
         let sqlQuery;
 
         const request = await connection.request();
-        if (serie.id === 0) {
+        if (serie.id == 0) {
 
             sqlQuery = 'exec usp_insertarSerie @nombre , @sinopsis , @anio_lanzamiento , @url_poster , @id_estudio; ';
             request.input('nombre', sql.VarChar(45), serie.nombre);
@@ -93,7 +93,7 @@ const register = ({ sql = mssql, connection }) => {
     const AddGendersBySerie = async ( cadena, id) => {
         let sqlQuery;
         const request = await connection.request();
-        if(id === 0 ){ //cadena: 4-7-3-5
+        if(id == 0 ){ //cadena: 4-7-3-5
             sqlQuery = 'exec usp_insertarGeneroSerie @cadena';
             request.input('cadena',sql.VarChar(100),cadena);
         }else{
@@ -116,7 +116,7 @@ const register = ({ sql = mssql, connection }) => {
     const AddDirectorsBySerie = async ( cadena, id) => {
         let sqlQuery;
         const request = await connection.request();
-        if(id === 0){ //cadena: 2-5-8-9.10
+        if(id == 0){ //cadena: 2-5-8-9.10
             sqlQuery = 'exec usp_insertarDirectorSerie @cadena';
             request.input('cadena', sql.VarChar(100),cadena);
         }else{
