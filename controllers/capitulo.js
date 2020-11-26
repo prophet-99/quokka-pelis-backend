@@ -5,11 +5,11 @@ const fs = require('fs');
 const path = require('path');
 
 const save = async (req = request, res = response) =>  {
-    const { id, numero, sinopsis,id_video} = req.body;
+    const { id, numero, sinopsis,id_video, id_temporada} = req.body;
     
     try{
         const { capituloRepository } = await SQLServerConnection.getRepositories();
-        const movie = new Capitulo({  id, numero, sinopsis,id_video });
+        const movie = new Capitulo({  id, numero, sinopsis, id_temporada, id_video });
 
         await capituloRepository.save(movie)
         res.json({ ok: true, msg: 'Se guardó correctamente' });        

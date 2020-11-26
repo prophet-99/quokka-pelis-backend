@@ -3,7 +3,7 @@ const Genero = require('../models/genero/genero');
 const SQLServerConnection = require('./../database');
 
 const findAll = async (req = request, res = response) => {
-    const { word } = req.body;
+    const { word } = req.query;
     const { generoRepository } = await SQLServerConnection.getRepositories();
 
     try{

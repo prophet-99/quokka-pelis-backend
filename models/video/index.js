@@ -27,7 +27,7 @@ const register = ({ sql = mssql, connection }) => {
         let sqlQuery;
 
         const request = await connection.request();
-        if (video.id === 0){
+        if (video.id == 0){
             sqlQuery = 'exec ups_AgregarVideo @url_video,@valoracion,@duracion';
             request.input('url_video', sql.VarChar(mssql.MAX), video.url_video);
             request.input('valoracion', sql.Int, video.valoracion);

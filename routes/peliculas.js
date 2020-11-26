@@ -15,7 +15,7 @@ router.get('/Directors', Directors);
 router.get('/Actors', Actors);
 router.get('/Character', Characters);
 router.post('/', upload.single('image'), save);
-router.delete('/',DeleteByMovie);
+router.delete('/:id',DeleteByMovie);
 
 
 module.exports = router;

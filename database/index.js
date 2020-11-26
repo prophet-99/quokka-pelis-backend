@@ -14,6 +14,7 @@ const video = require('./../models/video');
 const actor = require('./../models/actor');
 const director = require('./../models/director');
 const estudio = require('./../models/estudio');
+const personaje = require('./../models/personaje');
 
 class SQLServerConnection{
     static instance;
@@ -63,6 +64,8 @@ class SQLServerConnection{
             videoRepository: video.register({mssql, connection}),
             actorRepository: actor.register({mssql, connection}),
             directorRepository: director.register({mssql, connection}),
+            estudioRepository: estudio.register({mssql, connection}),
+            personajeRepository: personaje.register({mssql, connection}),
             serieRepository: serie.register({mssql, connection}),
             temporadaRepository: temporada.register({mssql, connection}),
             capituloRepository: capitulo.register({mssql, connection}),
