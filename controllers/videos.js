@@ -21,6 +21,7 @@ const findAll = async (req = request, res = response) => {
 
 const save = async (req = request, res = response) => {
     const { id, url_video, valoracion, duracion } = req.body;
+    console.log(req.body);
     console.log(url_video+'-'+valoracion);
     try{
         const { videoRepository } = await SQLServerConnection.getRepositories();

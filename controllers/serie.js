@@ -24,6 +24,19 @@ const findAll = async (req = request, res = response) => {
         res.status(500).json({ ok: false, msg: 'Error de servidor' });
     }
 };
+
+const findAllMant = async (req = request, res = response) => {
+    const { serieRepository } = await SQLServerConnection.getRepositories();
+
+    try{
+        const serieDB  = await serieRepository.findAllMant();
+        res.json({ ok: true, serie: serieDB });
+    }catch(err){
+        console.log(err);
+        res.status(500).json({ ok: false, msg: 'Error de servidor' });
+    }
+};
+
 const NumSerieForGender = async (req = request, res = response) => {
     const { serieRepository } = await SQLServerConnection.getRepositories();
 
@@ -114,5 +127,6 @@ module.exports = {
     save,
     Directors,
     DeleteBySerie,
-    Season
+    Season,
+    findAllMant
 };

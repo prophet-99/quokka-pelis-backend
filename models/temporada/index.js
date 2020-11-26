@@ -3,11 +3,30 @@ const mssql = require('mssql');
 const Temporada = require('./temporada');
 
 const register = ({ sql = mssql, connection }) => {
-    const save = async (temporada = new Temporada()) => {
-        let sqlQuery;
+
+    const findAll = async () => {
+        const sqlQuery = 'select * from ufn_ListarSeriesMantenimiento()';
 
         const request = await connection.request();
-        if (temporada.id === 0) {
+        return request.query(sqlQuery)
+            .then((vq) => vq.recordsets[0])
+            .catch((err) => { throw err; });
+    };
+
+    const findSeason = async ( word ) => {
+        const sqlQuery = 'select * from ufn_BuscarTemporadasMantenimiento(@word)';
+        const request = await connection.request();
+        request.input('word', sql.VarChar(50), word);
+        return request.query(sqlQuery)
+            .then((vq) => vq.recordsets[0])
+            .catch((err) => { throw err; });
+    };
+
+    const save = async (temporada = new Temporada()) => {
+        let sqlQuery;
+        console.log(temporada)
+        const request = await connection.request();
+        if (temporada.id == 0) {
 
             sqlQuery = 'exec usp_insertarTemporada @id_serie , @descripcion , @numero; ';
             request.input('numero', sql.Int, temporada.numero);
@@ -70,7 +89,9 @@ const register = ({ sql = mssql, connection }) => {
         DeleteBySeason,
         AddCharactersBySeason,
         deleteCharactersBySeason,
-        findCharactersBySeason
+        findCharactersBySeason,
+        findAll,
+        findSeason
     }
 };
 module.exports = { register };

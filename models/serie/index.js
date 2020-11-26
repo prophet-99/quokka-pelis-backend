@@ -11,6 +11,16 @@ const register = ({ sql = mssql, connection }) => {
             .then((vq) => vq.recordsets[0])
             .catch((err) => { throw err; });
     };
+
+    const findAllMant = async () => {
+        const sqlQuery = 'select * from ufn_ListarSeriesMant()';
+
+        const request = await connection.request();
+        return request.query(sqlQuery)
+            .then((vq) => vq.recordsets[0])
+            .catch((err) => { throw err; });
+    };
+
     const save = async (serie = new Serie()) => {
         let sqlQuery;
 
@@ -166,7 +176,8 @@ const register = ({ sql = mssql, connection }) => {
         deleteDirectorsBySerie,
         NumSerieForGender,
         Url_poster,
-        findSerieByFilter
+        findSerieByFilter,
+        findAllMant,
     }    
 };
 module.exports = { register };
