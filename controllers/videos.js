@@ -20,12 +20,13 @@ const findAll = async (req = request, res = response) => {
 };
 
 const save = async (req = request, res = response) => {
-    const { id, url_video, valoracion, duracion } = req.query;
-    
+    const { id, url_video, valoracion, duracion } = req.body;
+    console.log(url_video+'-'+valoracion);
     try{
         const { videoRepository } = await SQLServerConnection.getRepositories();
         const video = new Video({ id, url_video, valoracion, duracion });
         await videoRepository.save(video);
+        console.log('Estoy despues del video repository');
         res.json({ ok: true, msg: 'Se guardó correctamente' });        
     }catch(err){
         console.log(err);

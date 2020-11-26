@@ -16,27 +16,28 @@ const register = ({ sql = mssql, connection }) => {
 
     const save = async (movie = new Movie()) => {
         let sqlQuery;
-
+        console.log(movie.id)
         const request = await connection.request();
-        if (movie.id === 0) {
-
+        if (movie.id == 0) {
+            console.log('Estoy antes de Agregar');
             sqlQuery = 'exec ups_AgregarPelicula @nombre , @sinopsis , @anio_lanzamiento , @url_poster , @id_estudio; ';
             request.input('nombre', sql.VarChar(45), movie.nombre);
             request.input('sinopsis', sql.VarChar(mssql.MAX), movie.sinopsis);
             request.input('anio_lanzamiento', sql.Date, movie.anio_lanzamiento);
             request.input('url_poster', sql.VarChar(mssql.MAX), movie.url_poster);
             request.input('id_estudio', sql.Int, movie.id_estudio);
-
+            console.log('Estoy al final de Agregar');
             //TODO: ACABAR
         } else {
-            sqlQuery = 'exec ups_EditarPelicula @nombre,@sinopsis,@anio_lanzamiento,@url_poster,@id_video,@id_estudio,@id;';
+            console.log('Estoy antes de Editar');
+            sqlQuery = 'exec ups_EditarPelicula @nombre,@sinopsis,@anio_lanzamiento,@url_poster,@id_estudio,@id;';
             request.input('nombre', sql.VarChar(45), movie.nombre);
             request.input('sinopsis', sql.VarChar(mssql.MAX), movie.sinopsis);
             request.input('anio_lanzamiento', sql.Date, movie.anio_lanzamiento);
             request.input('url_poster', sql.VarChar(mssql.MAX), movie.url_poster);
-            request.input('id_video', sql.Int, movie.id_video);
             request.input('id_estudio', sql.Int, movie.id_estudio);
             request.input('id', sql.Int, movie.id);
+            console.log('Estoy al final de Editar');
         }
         return request.query(sqlQuery)
             .then((vq) => vq.recordsets[0])
@@ -123,11 +124,14 @@ const register = ({ sql = mssql, connection }) => {
     const AddGendersByMovie = async ( cadena , id) => {
         let sqlQuery;
         const request = await connection.request();
-        if(id === 0 ){
+        console.log(id);
+        if(id == 0 ){
+            console.log('Estoy antes de Agregar genero');
             sqlQuery = 'exec ups_AgregarPelicula_genero @cadena,@sepOne';
             request.input('cadena',sql.VarChar(mssql.MAX),cadena);
             request.input('sepOne',sql.Char(1),'-');
         }else{
+            console.log('Estoy antes de Editar genero');
             sqlQuery = 'exec ups_EditarPelicula_genero @cadena,@sepOne,@id';
             request.input('cadena',sql.VarChar(mssql.MAX),cadena);
             request.input('sepOne',sql.Char(1),'-');
@@ -150,7 +154,7 @@ const register = ({ sql = mssql, connection }) => {
     const AddDirectorsByMovie = async ( cadena , id) => {
         let sqlQuery;
         const request = await connection.request();
-        if(id === 0){
+        if(id == 0){
             sqlQuery = 'exec ups_AgregarPeliculaDirector @cadena,@sepOne';
             request.input('cadena', sql.VarChar(mssql.MAX),cadena);
             request.input('sepOne', sql.Char(1),'-');
@@ -177,7 +181,7 @@ const register = ({ sql = mssql, connection }) => {
     const AddCharactersByMovie =async ( cadena , id) => {
         let sqlQuery;
         const request = await connection.request();
-        if(id === 0){
+        if(id == 0){
             sqlQuery = 'exec ups_AgregarPersonaje @cadena,@sepOne,@sepTwo';
             request.input('cadena', sql.VarChar(mssql.MAX),cadena);
             request.input('sepOne', sql.Char(1),'|');

@@ -13,5 +13,6 @@ app.use(`${ baseAPI }/video`, require('./videos'));
 app.use(`${ baseAPI }/actor`, require('./actores'));
 app.use(`${ baseAPI }/director`, require('./directores'));
 app.use(`${ baseAPI }/estudio`, require('./estudios'));
+app.use(`${ baseAPI }/personaje`, require('./personaje'));
 
 module.exports = app;
