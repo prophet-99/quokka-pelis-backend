@@ -5,6 +5,9 @@ const usuario = require('./../models/usuario');
 const rol = require('./../models/rol');
 const pago = require('./../models/pago')
 const auth = require('./../models/auth');
+const serie = require('./../models/serie');
+const temporada = require('./../models/temporada');
+const capitulo = require('./../models/capitulo');
 const pelicula = require('./../models/pelicula');
 const genero = require('./../models/genero');
 const video = require('./../models/video');
@@ -62,7 +65,11 @@ class SQLServerConnection{
             actorRepository: actor.register({mssql, connection}),
             directorRepository: director.register({mssql, connection}),
             estudioRepository: estudio.register({mssql, connection}),
-            personajeRepository: personaje.register({mssql, connection})
+            personajeRepository: personaje.register({mssql, connection}),
+            serieRepository: serie.register({mssql, connection}),
+            temporadaRepository: temporada.register({mssql, connection}),
+            capituloRepository: capitulo.register({mssql, connection}),
+            estudioRepository: estudio.register({mssql, connection})
         }
     }
 }

@@ -13,7 +13,7 @@ const register = ({ sql = mssql, connection }) => {
             .then((vq) => vq.recordsets[0])
             .catch((err) => { throw err; });
     };
-
+    
     const save = async (movie = new Movie()) => {
         let sqlQuery;
         console.log(movie.id)
